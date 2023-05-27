@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { AiOutlineFieldTime, AiFillMedicineBox } from "react-icons/ai";
 import { FaAmbulance } from "react-icons/fa";
-import { BsHospital } from "react-icons/bs";
+import { IoTelescopeSharp } from "react-icons/io5";
 export default function Home() {
   return (
     <main className="container my-10 mx-auto px-10">
@@ -50,11 +50,48 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="flex flex-col items-center   mt-10">
-        <h2 className="font-semibold text-2xl">
-          Choose from the Ambulances below
-        </h2>
-      </div>
+      <section className="flex flex-col items-center mt-20">
+        <div className="flex gap-5 items-center">
+          <h2 className="font-semibold text-2xl">Insights</h2>
+          <IoTelescopeSharp size={40} fill="#45b5ef" />
+        </div>
+        <div className="flex mt-9 gap-10">
+          <p className="text-2xl font-semibold">5000 Alives Assisted</p>
+          <p className="text-2xl font-semibold">5 cities in Kenya</p>
+          <p className="text-2xl font-semibold">5 hospitals accross</p>
+          <p className="text-2xl font-semibold">20+ Ambulances</p>
+        </div>
+        <h3 className="mt-10 font-bold text-2xl">Our Partners</h3>
+        <div className="flex gap-5">
+          <Image
+            src="/images/hospital1.gif"
+            alt="little river"
+            height={200}
+            width={400}
+            className="object-cover"
+          />
+          <Image
+            src="/images/hospital2.png"
+            alt="little river"
+            height={200}
+            width={400}
+            className="object-contain"
+          />
+          <Image
+            src="/images/hospital3.avif"
+            alt="little river"
+            height={200}
+            width={400}
+            className="object-contain"
+          />
+        </div>
+        <button className="px-3 bg-primary text-white py-3 uppercase border rounded-md mt-10">
+          Book Now
+        </button>
+        <button className="px-3 bg-black text-white uppercase border rounded-md py-3 w-[250px] mt-5">
+          Call Us: 0720179897
+        </button>
+      </section>
     </main>
   );
 }
