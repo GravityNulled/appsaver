@@ -1,8 +1,9 @@
 "use client";
 
+import toast, { Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { Ambulance } from "@prisma/client";
+import { Ambulance, Booking } from "@prisma/client";
 import Image from "next/image";
 import axios from "axios";
 
@@ -14,6 +15,7 @@ const Book = () => {
   const [selectedPhone, setSelectedPhone] = useState<any>(null);
   const [city, setCity] = useState<any>(null);
   const [ambulances, setAmbulances] = useState<Ambulance[]>();
+  const [bookingHistory, setBookingHistory] = useState<Booking[]>();
 
   useEffect(() => {
     const data = async () => {
@@ -21,31 +23,40 @@ const Book = () => {
         (res) => res.json()
       );
       setAmbulances(ambulances);
+      const bookingHistory: Booking[] = await fetch("/api/booking").then(
+        (res) => res.json()
+      );
+      setBookingHistory(bookingHistory);
     };
     data();
   }, []);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await axios.post("/api/booking", {
-      ambulance_name: selectedAmbulance,
-      address: selectedaddress,
-      name: selectedName,
-      phone: selectedPhone,
-    });
-    console.log(res);
+    try {
+      const res = await axios.post("/api/booking", {
+        ambulance_name: selectedAmbulance,
+        address: selectedaddress,
+        name: selectedName,
+        phone: selectedPhone,
+      });
+      toast.success("Booking Successful");
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   };
   return (
     <div className="flex gap-20 flex-col items-center justify-center min-h-screen">
+      <Toaster />
       {session ? (
         <div className="shadow-lg rounded-lg p-4 bg-white w-full max-w-lg">
           <div className="flex gap-4 flex-col">
             <p className="text-center text-xl">Account details</p>
             <Image
-              src={"/images/profile.jpeg"}
+              src={session.user?.image || "/images/profile1.jpeg"}
               alt="profile"
               width={100}
               height={100}
-              className="rounded-full"
+              className="rounded-full h-[100px] w-[100px] object-cover"
             />
             <p className="text-sm">
               <span className="text-primary">Name: </span>
@@ -55,6 +66,27 @@ const Book = () => {
               <span className="text-primary">Email: </span>
               {session.user?.email || "ann"}
             </p>
+          </div>
+          <p className="py-10 font-bold text-center text-base">
+            Booking History
+          </p>
+          <div className="flex gap-5 flex-wrap">
+            {bookingHistory?.map((booking, index) => {
+              return (
+                <div key={index} className="flex flex-col gap-2 p-2">
+                  <p className="text-xs">Ambulance ID: {booking.ambulanceId}</p>
+                  <p className="text-xs">
+                    Reason: {booking.reason || "no reason was given"}
+                  </p>
+                  <p className="text-xs">
+                    Time: {booking.bookingDate.toString()}
+                  </p>
+                  <p className="text-xs">
+                    Address: {booking.address || "no address was given"}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : (

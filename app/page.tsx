@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { AiOutlineFieldTime, AiFillMedicineBox } from "react-icons/ai";
 import { FaAmbulance } from "react-icons/fa";
 import { IoTelescopeSharp } from "react-icons/io5";
@@ -33,12 +34,18 @@ export default function Home() {
               </li>
             </ol>
           </div>
-          <button className="px-3 bg-primary text-white py-3 uppercase border rounded-md">
+          <Link
+            href={"/book"}
+            className="px-3 bg-primary text-white py-3 w-[250px] uppercase border rounded-md mt-10"
+          >
             Book Now
-          </button>
-          <button className="px-3 bg-black text-white uppercase border rounded-md py-3 w-[250px]">
+          </Link>
+          <Link
+            href="tel: 0720179897"
+            className="px-3 bg-black text-white uppercase border rounded-md py-3 w-[250px]"
+          >
             Call Us: 0720179897
-          </button>
+          </Link>
         </div>
         <div className="relative w-full h-full">
           <Image
@@ -85,12 +92,18 @@ export default function Home() {
             className="object-contain"
           />
         </div>
-        <button className="px-3 bg-primary text-white py-3 uppercase border rounded-md mt-10">
+        <Link
+          href={"/book"}
+          className="px-3 bg-primary text-white py-3 uppercase border rounded-md mt-10"
+        >
           Book Now
-        </button>
-        <button className="px-3 bg-black text-white uppercase border rounded-md py-3 w-[250px] mt-5">
+        </Link>
+        <Link
+          href="tel: 0720179897"
+          className="px-3 bg-black text-white uppercase border rounded-md py-3 w-[250px] mt-5"
+        >
           Call Us: 0720179897
-        </button>
+        </Link>
       </section>
     </main>
   );

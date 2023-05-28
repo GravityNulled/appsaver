@@ -12,23 +12,26 @@ const Navbar = () => {
       <nav className="flex justify-between">
         <Link href="/">AppSaver 🚑</Link>
         <div className="flex gap-4 items-center">
-          <Link href="/about" className="font-semibold">
-            About
-          </Link>
           <Link href="/book" className="font-semibold">
             Book
           </Link>
-          <p className="font-semibold">Call</p>
+          <Link
+            href="tel: 0720179897"
+            className="px-3 bg-black text-white uppercase border rounded-md py-1"
+          >
+            Call Us
+          </Link>
           <div className="items-center flex gap-2">
             {session ? (
               <div className="flex items-center gap-2">
                 <p>Welcome {session.user?.name}</p>
-                {/* <Image
-                  src={session.user?.image || "/images/image3.jpeg"}
-                  alt="user"
-                  width={40}
-                  height={40}
-                /> */}
+                <Image
+                  src={session.user?.image || "/images/profile1.jpeg"}
+                  alt="profile"
+                  width={100}
+                  height={100}
+                  className="rounded-full h-[40px] w-[40px] object-cover"
+                />
                 <button
                   onClick={() => signOut()}
                   className="px-3 bg-primary text-white py-1 uppercase border rounded-md"
