@@ -41,10 +41,10 @@ export default function Home() {
             Book Now
           </Link>
           <Link
-            href="tel: 0720179897"
+            href="tel: 0714313267"
             className="px-3 bg-black text-white uppercase border rounded-md py-3 w-[250px]"
           >
-            Call Us: 0720179897
+            Call Us: 0714313267
           </Link>
         </div>
         <div className="relative w-full h-full">
@@ -98,6 +98,7 @@ export default function Home() {
         >
           Book Now
         </Link>
+
         <Link
           href="tel: 0720179897"
           className="px-3 bg-black text-white uppercase border rounded-md py-3 w-[250px] mt-5"

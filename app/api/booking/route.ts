@@ -7,7 +7,7 @@ import prisma from "@/utils/client";
 
 export async function POST(request: Request, response: Response) {
   const body = await request.json();
-  const { address, ambulance_name, name, phone } = body;
+  const { address, ambulance_name, name, phone, reason, hospital } = body;
   const session = await getServerSession(authOptions);
   if (session != null) {
     const user = await prisma.user.findUnique({
@@ -16,7 +16,6 @@ export async function POST(request: Request, response: Response) {
       },
     });
     const user_id = user?.id as string;
-    console.log(user);
     const ambulance = await prisma.ambulance.findFirst({
       where: {
         name: body.ambulance_name,
@@ -28,6 +27,8 @@ export async function POST(request: Request, response: Response) {
         ambulanceId: ambulance_id,
         userId: user_id,
         address: address,
+        reason: reason,
+        hospital: hospital,
       },
     });
     return NextResponse.json({ message: "Success" });
@@ -44,6 +45,8 @@ export async function POST(request: Request, response: Response) {
       ambulanceId: ambulance_id,
       userId: "cli7e90k90000d2gcifclz0ei",
       address: name + " " + address + " " + phone,
+      reason: reason,
+      hospital: hospital,
     },
   });
   return NextResponse.json({ message: "Guest booked Success" });
@@ -57,13 +60,18 @@ export async function GET(request: Request, response: Response) {
         email: session.user?.email as string,
       },
     });
-    const user_id = user?.id as string;
-    const bookings = await prisma.booking.findMany({
-      where: {
-        userId: user_id,
-      },
-    });
-    return NextResponse.json(bookings);
+    if (user?.email == "admin@gmail.com") {
+      const bookings = await prisma.booking.findMany();
+      return NextResponse.json(bookings);
+    } else {
+      const user_id = user?.id as string;
+      const bookings = await prisma.booking.findMany({
+        where: {
+          userId: user_id,
+        },
+      });
+      return NextResponse.json(bookings);
+    }
   }
-  return NextResponse.json({ message: "Failed" });
+  return NextResponse.json({ message: "Guest" });
 }

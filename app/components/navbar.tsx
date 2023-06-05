@@ -45,13 +45,13 @@ const Navbar = () => {
                   href={"/register"}
                   className="px-3 bg-primary text-white py-1 uppercase border rounded-md"
                 >
-                  Sign Up
+                  Register
                 </Link>
                 <button
                   onClick={() => signIn()}
                   className="px-3 py-1 uppercase border rounded-md"
                 >
-                  Sign In
+                  Log In
                 </button>
               </>
             )}

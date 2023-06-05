@@ -11,6 +11,10 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [zip, setZip] = useState("");
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
 
   const router = useRouter();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -20,6 +24,10 @@ const Register = () => {
         email,
         password,
         name,
+        zip,
+        address,
+        city,
+        phonenumber: phone,
       });
       toast.success("Registration successful");
     } catch (error) {
@@ -33,23 +41,63 @@ const Register = () => {
         <h3 className="text-2xl font-bold text-center">Register an account</h3>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="mt-4">
-            <div>
-              <label className="block">Name</label>
+            <div className="flex gap-2">
+              <div>
+                <label className="block">Name</label>
+                <input
+                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  placeholder="Name"
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
+              </div>
+              <div>
+                <label className="block">Email</label>
+                <input
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  placeholder="ann@gmail.com"
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
+              </div>
+            </div>
+            <div className="mt-4">
+              <label className="block">Address</label>
               <input
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
                 type="text"
-                placeholder="Name"
+                placeholder="Moi Avenue"
                 className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
               />
             </div>
-            <div>
-              <label className="block">Email</label>
+            <div className="mt-4">
+              <label className="block">Phone Number</label>
               <input
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setPhone(e.target.value)}
                 type="text"
-                placeholder="Email"
+                placeholder="0714313267"
                 className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
               />
+            </div>
+            <div className="flex gap-2">
+              <div className="mt-4">
+                <label className="block">City</label>
+                <input
+                  onChange={(e) => setCity(e.target.value)}
+                  type="text"
+                  placeholder="City"
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
+              </div>
+              <div className="mt-4">
+                <label className="block">Zip</label>
+                <input
+                  onChange={(e) => setZip(e.target.value)}
+                  type="text"
+                  placeholder="Zip"
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
+              </div>
             </div>
             <div className="mt-4">
               <label className="block">Password</label>
